@@ -1,0 +1,1 @@
+Sorgt dafür, dass automatisch ein Ordner data angelegt wird. 

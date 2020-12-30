@@ -1,0 +1,225 @@
+%
+% Referenzen
+% https://github.com/luong-komorebi/Begin-Latex-in-minutes#first-latex-file
+%
+
+\documentclass[a4paper]{article}
+
+\newcommand{\dd}[1]{\mathrm{d}#1}
+
+% Bilder einfügen
+\usepackage{graphicx}
+
+% Links
+\usepackage{hyperref}
+
+% Zitate
+\usepackage[sorting=none]{biblatex}
+\addbibresource{Zitate.bib}
+
+% Meta-Daten
+\title{Hintergründe zu der Szenarienentwicklung}
+\date{Dezember 2020}
+\begin{document}
+    
+    \maketitle
+    \begin{abstract}
+        Die vorgeschlagenen Szenarien beruhen auf einem Standard-SIR-Modell mit angepassten Parametern. Daraus wird eine Definition von R$_0$ und R$_{eff}$ abgeleitet. Mit diesen Erkenntnissen wird dann eine Formel für die Zahl der täglichen Neuinfektionen für ein konstantes R$_{eff}$ hergeleitet, die dann für die einzelnen Szenarien genutzt wird. 
+
+        Insbesondere wird untersucht, wie sich die Stärke der Kontaktreduktion auf die Länge des Halbierungsintervalls auswirkt.
+    \end{abstract}
+
+    \section{SIR-Modell}
+    \paragraph{}Es wird das Standard-SIR-Modell mit konstanten Raten verwendet \cite{jonesOnR0}: 
+
+    \begin{equation}
+        \frac{d}{dt} S(t) = - \beta \cdot S(t) \cdot I(t)
+    \end{equation}
+
+    \begin{equation}
+        \frac{d}{dt} I(t) = \beta \cdot S(t) \cdot I(t) - \nu I(t)
+    \end{equation}
+
+    \begin{equation}
+        \frac{d}{dt} R(t) = \nu I(t)
+    \end{equation}
+
+    Dabei beschreibt S(t) die zum Zeitpunkt t noch nicht infizierte Bevölkerung, I(t) die aktuell infektiöse Bevölkerung und R(t) den Teil der Bevölkerung, die die Infektion bereits hinter sich hat. Hier wird der Einfachkeit halber nicht zwischen Infektiosität und Infizierung unterschieden. 
+
+    $\beta$ ist die effektive Kontaktrate, für die gilt: $ \beta = \tau \cdot c $. $\tau$ ist dabei die Transmissibilität, c die durchschnittliche Kontaktrate. $\nu$ ist die Entfernungsrate.
+
+    \paragraph{R$_0$} Für $R_0$ gilt per Definition \cite{jonesOnR0}: $R_0 = \tau \cdot c \cdot d = \frac{\beta}{\nu}$, wobei $d = \frac{1}{\nu}$. 
+    
+    \paragraph{R$_{eff}$} Die effektive Reproduktionszahl erlaubt eine Änderung der Reproduktionszahl durch anderes Verhalten, wie Kontaktreduktion, Masken oder Abstandsregeln. 
+
+    Hier beschäftigen wir uns lediglich mit dem Fall einer Reduzierung und setzen: 
+
+    \begin{equation}
+        R_{eff} = \alpha \cdot R_0, \;\;\;\;\;\; \alpha \in [0, 1]
+    \end{equation}
+
+    Um besser einzuschätzen, um wie viel die effektive Kontaktrate \textit{zusätzlich} reduziert werden muss, sagen wir $\alpha=\mu \cdot \gamma$, wobei $\gamma$ die Reduktion auf $R_{eff}=1$ garantiert, wenn $\mu=1$. 
+
+    Mitte bis Ende November galt also ungefähr: $ R_{eff,N} = \gamma \cdot R_0 = 1 $
+
+    \paragraph{}Für eine Reduzierung der Inzidenz müsste also gelten: 
+    
+    $$R_{eff} = \mu \cdot R_{eff,N}, \;\;\;\;\;\; \mu < 1$$
+
+    % Geschlossene Lösung
+    \section{Geschlossene Lösung für Neuinfektionen}
+    \paragraph{}Wir suchen nun eine geschlossene Lösung, um die Zahl der Neuinfektionen als Funktion von $R_0$ und $\alpha$ auszudrücken. Dazu nehmen wir eine Bevölkerung an, die größtenteils nicht infiziert ist oder war, sodass $S(t)=1$ genähert werden kann. Dann gilt für (2):
+
+    $$ \frac{d}{dt}I(t) = \beta \cdot I(t) - \nu \cdot I(t) = (\beta - \nu) \cdot I(t) $$
+
+    $\frac{d}{dt}I(t)$ stellt dabei aber insbesondere \textbf{nicht} die Zahl der täglichen Neuinfektionen dar. Stattdessen betrachtet es die Veränderung der Infektionen, das heißt sowohl Neuinfektionen aber auch neue Genesungen. 
+
+
+    \paragraph{}Die Zahl der täglich Neuinfizierten ergibt sich für $S(t)=1$ stattdessen als $\dot{I}_{neu}(t) = \beta I(t)$. 
+
+    \paragraph{}
+
+    $I(t)$ lässt sich aber geschlossen lösen zu 
+
+    $$ I(t) = e^{(\beta - \nu) \cdot t} $$ 
+
+    Damit gilt für die Zahl der täglichen Neuinfektionen $\dot{I}_{neu}(t)$: 
+
+    \begin{equation}
+        \dot{I}_{neu}(t) = \beta \cdot e^{(\beta - \nu) \cdot t}
+    \end{equation}
+
+    \paragraph{}Das kann nun in Abhängigkeit von $R_0$ und $d$ ausgedrückt werden mit $R_0 = \beta \cdot d$: 
+
+    \begin{equation}
+        \dot{I}_{neu}(t) = \frac{R_0}{d} \cdot e^{\frac{R_0 - 1}{d} \cdot t}
+    \end{equation}
+
+    % Halbierungsintervalle
+    \section{Halbierungsintervalle}
+    \paragraph{}Von besonderem Interesse ist die Zeit, die benötigt wird, um eine Halbierung der Inzidenz zu ermöglichen. Nach dem Halbierungsintervall $\Delta$ gilt dann: 
+
+    $$ \dot{I}_{neu}(\Delta) = \frac{1}{2} \dot{I}_{neu}(0) $$
+    
+    Somit hat ein Halbierungsintervall folgende Länge, wenn man $R_{eff}$ statt $R_0$ einsetzt: 
+
+    \begin{equation}
+        \Delta = ln(\frac{1}{2}) \cdot \frac{d}{R_{eff} - 1} = ln(\frac{1}{2}) \cdot \frac{d}{R_{eff,N}} \cdot \frac{1}{ ( \mu - \frac{1}{R_{eff,N}} )}
+    \end{equation}
+
+    Da $R_{eff,N}=1$ vereinfacht sich diese Gleichung zu: 
+
+    \begin{equation}
+        \Delta = ln(\frac{1}{2}) \cdot d \cdot \frac{1}{ ( \mu - 1 ) }
+    \end{equation}
+
+    Eine qualitative Betrachtung ergibt also: 
+
+    \begin{enumerate}
+        \item Für keinerlei zusätzliche Kontaktreduktion ($\mu \to 1 $) wird nie eine Halbierung erreicht werden.
+        \item Selbst für eine vollständige Kontaktreduktion ($\mu \to 0 $) kann das Halbierungsintervall nicht beliebig klein, aber zumindest minimal werden. 
+    \end{enumerate}
+
+    \paragraph{Allgemeine Verringerungsintervalle}Für eine Verringerung der Inzidenz vom $J_{start}$ zu $J_{ende}$ ergibt sich folgender Zeitraum (mit dem gleichen Ansatz wie bei den Halbierungsintervallen): 
+
+    \begin{equation}
+        \Delta_V = ln(\frac{J_{ende}}{J_{start}}) \cdot \frac{d}{R_{eff} - 1} = ln(\frac{J_{ende}}{J_{start}}) \cdot \frac{d}{R_{eff,N}} \cdot \frac{1}{ ( \mu - \frac{1}{R_{eff,N}} )}
+    \end{equation}
+
+    \paragraph{}Da $R_{eff,N}=1$ vereinfacht sich aus dieser Ausdruck zu: 
+
+    $$ \Delta_V = ln(\frac{J_{ende}}{J_{start}}) \cdot d \cdot \frac{1}{ ( \mu - 1 ) } $$
+
+    % Ausgewählte Werte für Halbierungsintervalle
+    \paragraph{Ausgewählte Werte für Halbierungsintervalle} Um einige Vorstellungen für die Effektivität zusätzlicher Kontaktreduktion zu bekommen, hier einige Beispielwerte mit $d=4$, was der Generationszeit von vier Tagen, die vom RKI im Nowcasting verwendet wird, entspricht \cite{heidenNowcasting}. Die Rechtfertigung für diesen Wert ist im Anhang enthalten.
+
+    \begin{center}
+        \begin{tabular}{ |c||c| } 
+            \hline
+                $\mu$ & Halbierungsintervall [Tage] \\
+                \hline\hline
+                1 & $\infty$ \\ 
+                0.9 & 28 \\ 
+                0.8 & 14 \\ 
+                0.7 & 9 \\ 
+                0.6 & 7 \\ 
+                0.5 & 6 \\ 
+            \hline
+        \end{tabular}
+    \end{center}
+
+    \paragraph{Beispiel: Israel}Selbst ein Halbierungsintervall von 7 Tagen ist durchaus zu schaffen, wie man am Beispiel Israel sieht.
+
+    Am 06. Oktober gab es landesweite eine 7-Tages-Inzidenz von 460,3; 25 Tage später am 31. Oktober lag sie nur noch bei 53,8 \cite{zeitOnline}. 
+
+    Damit ergibt sich eine tägliche Reduktion $\delta_d$ der Neuinfektionen auf 91,8\% des Vortagwertes ($\Delta_V$ gibt den Zeitraum zwischen beiden Inzidenzen in Tagen an):
+
+    \begin{equation}
+        \delta_d = \sqrt[\Delta_{V}]{\frac{J_{ende}}{J_{start}}} 
+    \end{equation}
+
+    Somit ergibt sich nach einer Woche Reduktion $\delta_w$ auf 54,8\% des Vorwochenwertes mit folgender Formel:  
+    
+    $$ \delta_w = \delta_{d}^7 $$
+
+    \section{Anhang}
+    \subsection{Verwendung der Generationszeit $d$}
+    Es ist nicht ganz offensichtlich, dass die mittlere Generationszeit einfach als Parameter $d$ verwendet werden darf. 
+
+    Aus \cite{generationTime} ist allerdings bekannt, dass für die Reproduktionszahl $R=1+r \cdot T_c$ gilt, wobei $T_c$ die mittlere Generationszeit ist. $r$ beschreibt die Rate des exponentiellen Wachstums. 
+
+    Wenn wir nun annehmen $d = T_c$, dann muss also gelten: 
+
+    $$ R_{0} = R $$
+    $$ \beta \cdot d = 1 + r \cdot T_c $$
+
+    Im SIR-Modell ist aber gerade $r=\beta - \nu=\beta - \frac{1}{d}$. Somit gilt: 
+
+    $$ \beta \cdot d = 1 + (\beta - \frac{1}{d}) \cdot T_c $$
+
+    $$ \beta \cdot d = 1 + (\beta - \frac{1}{d}) \cdot d $$
+
+    $$ \beta \cdot d = 1 + \beta \cdot d - \frac{1}{d} \cdot d  $$
+
+    $$ \beta \cdot d = 1 + \beta \cdot d -1  $$
+
+    $$ \beta \cdot d = \beta \cdot d  $$
+
+    Der größte Kritikpunkt besteht darin, dass bei dieser Definition anhand des SIR-Modells die Generationszeit als exponentiell verteilt angenommen wird, mit Mittelwert $d$ \cite{generationTime}. 
+
+    Der Einfluss dieser Annahme sollte aber gering sein. In \cite{althausTwitter} wurde eine gammaverteilte Generationszeit mit Mittelwert von 4,8 Tagen und Standardabweichung von 2,3 Tagen. Die Ergebnisse sind im Wesentlichen identisch. Dort wurden folgende Ergebnisse erhalten: 
+
+    \begin{center}
+        \begin{tabular}{ |c||c| } 
+            \hline
+                $R_{eff}$ & Halbierungsintervall [Tage] \\
+                \hline\hline
+                1 & $\infty$ \\ 
+                0.9 & 32 \\ 
+                0.78 & 14 \\ 
+                0.68 & 9,8 \\ 
+            \hline
+        \end{tabular}
+    \end{center}
+
+    Bei gleicher Generationszeit würde man mit der Änderung von $\mu$ folgende Werte erhalten.
+
+    \begin{center}
+        \begin{tabular}{ |c||c| } 
+            \hline
+                $\mu$ & Halbierungsintervall [Tage] \\
+                \hline\hline
+                1 & $\infty$ \\ 
+                0.9 & 33 \\ 
+                0.78 & 15,1 \\ 
+                0.68 & 10,4 \\ 
+            \hline
+        \end{tabular}
+    \end{center}
+
+    Da gilt $R_{eff} = \mu \cdot R_{eff,N}$ und $ R_{eff,N} = \gamma \cdot R_0 = 1 $, gilt somit $R_{eff} = \mu$, zumindest für $R_{eff} < 1$. Damit wird sofort ersichtlich, dass die Unterschiede zwischen den Annahmen in \cite{althausTwitter} und unserem Modell vernachlässigbar sind. 
+
+    % Referenzen
+    \printbibliography
+
+\end{document}

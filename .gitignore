@@ -1,0 +1,12 @@
+description/*
+!description/*.tex
+!description/*.pdf
+
+data/*.json
+data/*.txt
+data/*.xlsx
+data/*.csv
+!data/data.txt
+
+__pycache__/*
+.DS_Store
