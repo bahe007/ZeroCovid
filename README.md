@@ -15,5 +15,15 @@ Im aktuellen Stand (30. 12. 2020) dienen dabei die geglätteten Neuinfektionen a
 *Stand: 30. 12. 2020*
 
 ## Szenarien für die Inzidenz
+**Hinweise**
+
+Bei den gezeigten Szenarien handelt es sich **nicht** um Vorhersagen. Sie erlauben allerdings eine Abschätzung, wie schnell Reduktionen von Neuinfektionen prinzipiell möglich wären: Weniger Kontakte in Innenräumen, größere Abstände und weniger Kontakte insgesamt führen zu einem niedrigeren R-Wert. 
+>
+> *Beispiel:* Hätten Sie bei `R=1` zehn Kontakte, hätten Sie für `R=0.9` noch neun Kontakte oder einen Kontakt mit Abständen draußen statt in Innenräumen. 
+> 
+> Mit Verzicht auf einen weiteren Kontakt, erhalten Sie `R=0.8`. In diesem Fall werden niedrigere Fallzahlen **deutlich** schneller erreicht als  mit `R=0.9`. 
+
+Bei `R=0.7` halbieren sich die Fallzahlen circa jede Woche. 
+
 ![](images/scenario-24-12-2020.png)
-*Stand: 30. 12. 2020*
+*Stand: 04. 01. 2021 (Szenarien beginnen am 24. Dezember 2020)*
