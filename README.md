@@ -8,7 +8,7 @@ Im aktuellen Stand (30. 12. 2020) dienen dabei die geglätteten Neuinfektionen a
 # Beispiele
 ## Verlauf der Fallzahlen in Deutschland
 ![](images/daily-new-cases.png)
-*Stand: 30. 12. 2020*
+*Stand: 04. 01. 2020*
 
 ## Qualitativer Verlauf der Fallzahlen in Landkreisen
 ![](images/counties-30-12-2020.png)
