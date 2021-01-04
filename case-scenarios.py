@@ -47,20 +47,7 @@ scenario_start = "2020/12/24" # Startdatum, ab dem die Simulation einsetzt
 ############## Zeichne Fallzahlen ##############
 fig, ax = plt.subplots()
 
-# Achsen-Beschriftungen
-xtick_positions = [t.index("2020/06/01"), t.index("2020/07/01"), t.index("2020/08/01"), t.index("2020/09/01"), t.index("2020/10/01"), t.index("2020/11/01"), t.index("2020/12/01"), t.index("2021/01/01"), t.index("2021/02/01"), t.index("2021/03/01")]
-xlabels = ["01. Juni", "01. Juli", "01. August", "01. September", "01. Oktober", "01. November", "01. Dezember", "01. Januar", "01. Februar", "01. März"]
-ax.set_xticks(xtick_positions)
-ax.set_xticklabels(xlabels)
-
-ax.set_xlim(150, len(t))
-
-ax.set_xlabel("Zeit")
-ax.set_ylabel("7-Tages-Inzidenz")
-
-ax.grid(True)
-
-confirmed_incidence = helpers.moving_average(cases)[:-3]*7/810
+confirmed_incidence = helpers.moving_average(cases)*7/810
 
 start = t.index(scenario_start)
 end = start+50
@@ -68,12 +55,9 @@ end = start+50
 # absoluter Unsicherheitsfaktor in R
 delta = 0.025
 
-# Tatsächliche Fallzahlen
-ax.plot(t0[:-3], confirmed_incidence, label="Tatsächliche Fallzahlen")
-
 # Zielgrößen
-ax.plot(t,[7]*len(t), c="black", label="Priesemann-Ziel")
-ax.plot(t, [50]*len(t), c="grey", label="Bundesregierungs-Ziel")
+ax.plot(t,[7]*len(t), c="black", label="containcovid-pan.eu - Ziel")
+ax.plot(t, [50]*len(t), c="grey", label="Ziel der Bundesregierung")
 
 
 # R=0.7
@@ -99,6 +83,21 @@ scenario_R_09_lower = simulate(start, end+45, 0.9-delta, confirmed_incidence[sta
 scenario_R_09_upper = simulate(start, end+45, 0.9+delta, confirmed_incidence[start])
 ax.plot(t[start:end+45], scenario_R_09[start:end+45], label="R_eff=0.9", color="orange")
 ax.fill_between(t[start:end+45], scenario_R_09_lower[start:end+45], scenario_R_09_upper[start:end+45], color='orange', alpha=.5)
+
+# Tatsächliche Fallzahlen
+ax.plot(t0[:-3], confirmed_incidence[:-3], label="Tatsächliche Fallzahlen (geglättet)", color="red")
+
+# Achsen-Beschriftungen
+xlabels = ["01. Juni", "01. Juli", "01. August", "01. September", "01. Oktober", "01. November", "01. Dezember", "01. Januar", "01. Februar", "01. März"]
+ax.set_xticks(["2020/06/01", "2020/07/01", "2020/08/01", "2020/09/01", "2020/10/01", "2020/11/01", "2020/12/01", "2021/01/01", "2021/02/01", "2021/03/01"])
+ax.set_xticklabels(xlabels)
+
+ax.set_xlim(150, len(t))
+
+ax.set_xlabel("Zeit")
+ax.set_ylabel("7-Tages-Inzidenz")
+
+ax.grid(True)
 
 
 ax.legend(loc="upper left")
