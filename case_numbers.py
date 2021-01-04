@@ -4,16 +4,18 @@ import numpy as np
 import csv
 import helpers
 
-def get_cases(file_name):
+def get_cases(file_name, states=None):
     """Ermittelt die täglichen Neuinfektionen aus RKI-Daten. 
 
-    Gibt den Zeitraum und die täglichen Neuinfektionen zurück
+    Gibt den Zeitraum und die täglichen Neuinfektionen zurück. Optional
+    kann eine Begrenzung auf eine Liste von Bundesländern angegeben werden
     """
     t = helpers.generate_t(file_name)
     cases = np.zeros(len(t))
 
     caseNumberIdx = 0
     dateIdx = 0
+    stateIdx = 0
 
     with open(file_name, "r") as fp: 
         csv_reader = csv.reader(fp, delimiter=',')
@@ -23,13 +25,15 @@ def get_cases(file_name):
             if not title_row_read:
                 caseNumberIdx = row.index("AnzahlFall")
                 dateIdx = row.index("Meldedatum")
+                stateIdx = row.index("Bundesland")
                 title_row_read = True
                 continue
 
-            caseNumber = row[caseNumberIdx]
-            date = row[dateIdx][:-9]
+            if states == None or ( row[stateIdx] in states ):
+                caseNumber = row[caseNumberIdx]
+                date = row[dateIdx][:-9]
 
-            cases[t.index(date)] = cases[t.index(date)] + float(caseNumber)
+                cases[t.index(date)] = cases[t.index(date)] + float(caseNumber)
 
     return t, cases
 
