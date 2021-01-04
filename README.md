@@ -3,8 +3,6 @@ Basierend auf den offiziellen RKI-Fallzahlen kann mit diesen Python-Skripten der
 
 Interessanter ist vermutlich die Möglichkeit zur Darstellung von Zukunftsszenarien. Hintergrundinformationen zur Methodik ist in der [Erläuterung](description/Grundlagen.pdf) zu finden. Im Wesentlichen werden für verschiedene, jeweils konstante Reproduktionszahlen ungefähre Verläufe der Neuinfektionen dargestellt.
 
-Im aktuellen Stand (30. 12. 2020) dienen dabei die geglätteten Neuinfektionen am 24. 12. den Ausgangspunkt, um Feiertag-bedingte Schwankungen zu umgehen. 
-
 # Beispiele
 ## Verlauf der Fallzahlen in Deutschland
 ![](images/daily-new-cases.png)
