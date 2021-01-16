@@ -29,8 +29,8 @@ matrix = np.array([np.log(helpers.moving_average(cases_per_county[county])[:-3]+
 fig, ax = plt.subplots()
 ax.set_ylabel("Landkreise")
 
-xtick_positions = [t.index("2020/02/01"), t.index("2020/04/01"), t.index("2020/06/01"), t.index("2020/08/01"), t.index("2020/10/01"), t.index("2020/12/01")]
-xlabels = ["1. Februar", "1. April", "1. Juni", "1. August", "1. Oktober", "01. Dezember"]
+xtick_positions = [t.index("2020/02/01"), t.index("2020/03/01"), t.index("2020/04/01"), t.index("2020/05/01"), t.index("2020/06/01"), t.index("2020/07/01"), t.index("2020/08/01"), t.index("2020/09/01"), t.index("2020/10/01"), t.index("2020/11/01"), t.index("2020/12/01"), t.index("2021/01/01")]
+xlabels = ["1. Februar", "", "1. April", "", "1. Juni", "", "1. August", "", "1. Oktober", "", "1. Dezember", ""]
 
 cax = ax.matshow(matrix, cmap=matplotlib.cm.Reds)
 

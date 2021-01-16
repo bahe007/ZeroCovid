@@ -6,11 +6,11 @@ Interessanter ist vermutlich die Möglichkeit zur Darstellung von Zukunftsszenar
 # Beispiele
 ## Verlauf der Fallzahlen in Deutschland
 ![](images/daily-new-cases.png)
-*Stand: 04. 01. 2020*
+*Stand: 16. 01. 2021*
 
 ## Qualitativer Verlauf der Fallzahlen in Landkreisen
-![](images/counties-30-12-2020.png)
-*Stand: 30. 12. 2020*
+![](images/counties-2d-view.png)
+*Stand: 16. 01. 2021*
 
 ## Szenarien für die Inzidenz
 **Hinweise**
