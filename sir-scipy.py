@@ -47,8 +47,8 @@ alpha = neu[0]/np.exp((R_0-1)/d)
 neu_infiziert_exp = alpha*np.exp(((R_0)-1)/d * (t[:]))
 
 ############## Ergebnisse anzeigen ##############
-plt.plot(t[1:], neu, label="di(t) (SIR)")
-plt.plot(t[1:], neu_infiziert_exp[1:], label="di(t) (exp)")
+plt.plot(t[1:], neu, label="-ds(t) (SIR)")
+plt.plot(t[1:], neu_infiziert_exp[1:], label="-ds(t) (exp)")
 
 plt.yscale('log')
 plt.legend(loc="upper left")
