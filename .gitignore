@@ -6,6 +6,7 @@ data/*.json
 data/*.txt
 data/*.xlsx
 data/*.csv
+data/*.icloud
 !data/data.txt
 
 __pycache__/*
