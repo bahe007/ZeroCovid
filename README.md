@@ -1,4 +1,8 @@
-# ZeroCovid: Aktuelle Situation & Zukunfts-Szenarien
+# Covid19: Aktuelle Situation & Zukunfts-Szenarien
+> **Aktueller Hinweis zur "#ZeroCovid"-Initiative**
+>
+> Auch wenn das Github-Repository den Namen "ZeroCovid" trägt, unterstütze ich nicht die Initiative, die eine Stilllegung der Wirtschaft fordert ([zero-covid.org](https://zero-covid.org)). Das Repository ist entstanden, bevor diese Inititative öffentlich wurde. 
+
 Basierend auf den offiziellen RKI-Fallzahlen kann mit diesen Python-Skripten der Verlauf der Neuinfektionen sowohl für Gesamtdeutschland als auch auf Landkreisebene dargestellt werden. 
 
 Interessanter ist vermutlich die Möglichkeit zur Darstellung von Zukunftsszenarien. Hintergrundinformationen zur Methodik ist in der [Erläuterung](description/Grundlagen.pdf) zu finden. Im Wesentlichen werden für verschiedene, jeweils konstante Reproduktionszahlen ungefähre Verläufe der Neuinfektionen dargestellt.
@@ -6,11 +10,11 @@ Interessanter ist vermutlich die Möglichkeit zur Darstellung von Zukunftsszenar
 # Beispiele
 ## Verlauf der Fallzahlen in Deutschland
 ![](images/daily-new-cases.png)
-*Stand: 16. 01. 2021*
+*Stand: 26. 01. 2021*
 
 ## Qualitativer Verlauf der Fallzahlen in Landkreisen
 ![](images/counties-2d-view.png)
-*Stand: 16. 01. 2021*
+*Stand: 26. 01. 2021*
 
 ## Szenarien für die Inzidenz
 **Hinweise**
