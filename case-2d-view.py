@@ -40,4 +40,6 @@ ax.set_xticklabels(xlabels)
 ax.set_yticks([])
 ax.grid(True)
 
-plt.show()
+fig.set_figheight(9.6)
+fig.set_figwidth(15)
+plt.savefig("images/counties-2d-view.png")
