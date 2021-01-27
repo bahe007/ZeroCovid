@@ -10,7 +10,7 @@ Interessanter ist vermutlich die Möglichkeit zur Darstellung von Zukunftsszenar
 # Beispiele
 ## Verlauf der Fallzahlen in Deutschland
 ![](images/daily-new-cases.png)
-*Stand: 26. 01. 2021*
+*Wird jeden Tag um 08:00 Uhr UTC aktualisiert. Die geglätteten Fallzahlen werden bis vor drei Tagen angezeigt.*
 
 ## Qualitativer Verlauf der Fallzahlen in Landkreisen
 ![](images/counties-2d-view.png)
