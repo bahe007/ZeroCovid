@@ -28,4 +28,4 @@ Bei den gezeigten Szenarien handelt es sich **nicht** um Vorhersagen. Sie erlaub
 Bei `R=0.7` halbieren sich die Fallzahlen circa jede Woche. 
 
 ![](images/scenario.png)
-*Stand: 27. 01. 2021 (Szenarien beginnen am 23. Januar 2021)*
+*Wird jeden Tag um 08:00 Uhr UTC aktualisiert. Die Szenarien beginnen vier Tage zuvor.*
