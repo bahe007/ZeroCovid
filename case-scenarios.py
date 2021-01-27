@@ -10,6 +10,7 @@ werden beispielsweise die Grenzen bei R_eff=0,675 und R_eff=0,725 gezogen.
 """
 import helpers
 import case_numbers
+import datetime
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -28,8 +29,8 @@ def simulate(start, end, R_eff, N0):
     global t
     cases = np.zeros(len(t))
     d = 4.0
-    for ti in range(start, end):
-        cases[ti] = N0*np.exp((R_eff-1)/d * (ti-start) )
+    for ti in range(start, min(end, len(t))):
+        cases[ti] = N0*np.exp(np.log(R_eff)/d * (ti-start) )
     return cases
 
 ############## Rohdaten ##############
@@ -42,7 +43,10 @@ t = helpers.augment_t(t0, 90)
 
 ############## Konstanten ##############
 d = 4.0 # Dauer der Infektiosität
-scenario_start = "2020/12/24" # Startdatum, ab dem die Simulation einsetzt
+
+now = datetime.datetime.now()
+start_date = now-datetime.timedelta(days=4) # Startdatum der Szenarien ist standardmäßig vor vier Tagen
+scenario_start = start_date.strftime("%Y/%m/%d")
 
 ############## Zeichne Fallzahlen ##############
 fig, ax = plt.subplots()
@@ -59,40 +63,26 @@ delta = 0.025
 ax.plot(t,[7]*len(t), c="black", label="containcovid-pan.eu - Ziel")
 ax.plot(t, [50]*len(t), c="grey", label="Ziel der Bundesregierung")
 
+# Szenarien zeichnen
+R = [0.7, 0.8, 0.9]
+colors = ["green", "blue", "purple"]
+for i in range(len(R)):
+    end = start + int(np.log(7/confirmed_incidence[start])*d/np.log(R[i]+delta))
 
-# R=0.7
-scenario_R_07 = simulate(start, end, 0.7, confirmed_incidence[start])
-scenario_R_07_lower = simulate(start, end, 0.7-delta, confirmed_incidence[start])
-scenario_R_07_upper = simulate(start, end, 0.7+delta, confirmed_incidence[start])
+    lower_bound = simulate(start, end, R[i]-delta, confirmed_incidence[start])
+    upper_bound = simulate(start, end, R[i]+delta, confirmed_incidence[start])
 
-ax.plot(t[start:end], scenario_R_07[start:end], label="R_eff=0.7 (vgl. Israel)", color="b")
-ax.fill_between(t[start:end], scenario_R_07_lower[start:end], scenario_R_07_upper[start:end], color='b', alpha=.5)
+    ax.fill_between(t[start:end], lower_bound[start:end], upper_bound[start:end], color=colors[i], alpha=.5, label="R_eff={:.1f}".format(R[i]))
 
-# R=0.8
-scenario_R_08 = simulate(start, end+25, 0.8, confirmed_incidence[start])
-scenario_R_08_lower = simulate(start, end+25, 0.8-delta, confirmed_incidence[start])
-scenario_R_08_upper = simulate(start, end+25, 0.8+delta, confirmed_incidence[start])
-
-ax.plot(t[start:end+25], scenario_R_08[start:end+25], label="R_eff=0.8 (vgl. Frühjahr)", color="g")
-ax.fill_between(t[start:end+25], scenario_R_08_lower[start:end+25], scenario_R_08_upper[start:end+25], color='g', alpha=.5)
-
-
-# R=0.9
-scenario_R_09 = simulate(start, end+45, 0.9, confirmed_incidence[start])
-scenario_R_09_lower = simulate(start, end+45, 0.9-delta, confirmed_incidence[start])
-scenario_R_09_upper = simulate(start, end+45, 0.9+delta, confirmed_incidence[start])
-ax.plot(t[start:end+45], scenario_R_09[start:end+45], label="R_eff=0.9", color="orange")
-ax.fill_between(t[start:end+45], scenario_R_09_lower[start:end+45], scenario_R_09_upper[start:end+45], color='orange', alpha=.5)
-
-# Tatsächliche Fallzahlen
-ax.plot(t0[:-3], confirmed_incidence[:-3], label="Tatsächliche Fallzahlen (geglättet)", color="red")
+# Tatsächliche Meldedaten
+ax.plot(t0[:-3], confirmed_incidence[:-3], label="Meldedaten des RKI (geglättet)", color="red")
 
 # Achsen-Beschriftungen
-xlabels = ["01. Juni", "01. Juli", "01. August", "01. September", "01. Oktober", "01. November", "01. Dezember", "01. Januar", "01. Februar", "01. März"]
-ax.set_xticks(["2020/06/01", "2020/07/01", "2020/08/01", "2020/09/01", "2020/10/01", "2020/11/01", "2020/12/01", "2021/01/01", "2021/02/01", "2021/03/01"])
+xlabels = ["01. Juni", "01. Juli", "01. August", "01. September", "01. Oktober", "01. November", "01. Dezember", "01. Januar", "01. Februar", "01. März", "01. April"]
+ax.set_xticks(["2020/06/01", "2020/07/01", "2020/08/01", "2020/09/01", "2020/10/01", "2020/11/01", "2020/12/01", "2021/01/01", "2021/02/01", "2021/03/01", "2021/04/01"])
 ax.set_xticklabels(xlabels)
 
-ax.set_xlim(150, len(t))
+ax.set_xlim(180, len(t)-1)
 
 ax.set_xlabel("Zeit")
 ax.set_ylabel("7-Tages-Inzidenz")
@@ -101,4 +91,6 @@ ax.grid(True)
 
 
 ax.legend(loc="upper left")
-plt.show()
+fig.set_figheight(9.6)
+fig.set_figwidth(15)
+plt.savefig("images/scenario.png")

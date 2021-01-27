@@ -3,9 +3,9 @@
 >
 > Auch wenn das Github-Repository den Namen "ZeroCovid" trägt, unterstütze ich nicht die Initiative, die eine Stilllegung der Wirtschaft fordert ([zero-covid.org](https://zero-covid.org)). Das Repository ist entstanden, bevor diese Inititative öffentlich wurde. 
 
-Basierend auf den offiziellen RKI-Fallzahlen kann mit diesen Python-Skripten der Verlauf der Neuinfektionen sowohl für Gesamtdeutschland als auch auf Landkreisebene dargestellt werden. 
+Mit diesem Python-Skripten kann der Verlauf der gemeldeten Neuinfektionen (nach Meldedatum) sowohl für Gesamtdeutschland als auch auf Landkreisebene dargestellt werden.
 
-Interessanter ist vermutlich die Möglichkeit zur Darstellung von Zukunftsszenarien. Hintergrundinformationen zur Methodik ist in der [Erläuterung](description/Grundlagen.pdf) zu finden. Im Wesentlichen werden für verschiedene, jeweils konstante Reproduktionszahlen ungefähre Verläufe der Neuinfektionen dargestellt.
+Interessanter ist vermutlich die Möglichkeit zur Darstellung von Zukunftsszenarien. Die Beschreibung zur Methodik wird aktuell angepasst, im Wesentlichen werden aber einfach für verschiedene, jeweils konstante Reproduktionszahlen ungefähre Verläufe der neu gemeldeten Infektionen dargestellt. Die alte Beschreibung finden Sie [hier](description/Grundlagen.pdf). Inzwischen wird allerdings eine etwas andere Definition der Reproduktionszahl genutzt. 
 
 # Beispiele
 ## Verlauf der Fallzahlen in Deutschland
@@ -27,5 +27,5 @@ Bei den gezeigten Szenarien handelt es sich **nicht** um Vorhersagen. Sie erlaub
 
 Bei `R=0.7` halbieren sich die Fallzahlen circa jede Woche. 
 
-![](images/scenario-24-12-2020.png)
-*Stand: 04. 01. 2021 (Szenarien beginnen am 24. Dezember 2020)*
+![](images/scenario.png)
+*Stand: 27. 01. 2021 (Szenarien beginnen am 23. Januar 2021)*
