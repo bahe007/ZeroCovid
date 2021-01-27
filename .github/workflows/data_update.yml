@@ -27,6 +27,7 @@ jobs:
         run: |
             python case-scenarios.py
             python case-display.py
+            python case-2d-view.py
 
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
