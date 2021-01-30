@@ -38,7 +38,7 @@ ax.set_xticks(xtick_positions)
 ax.set_xticklabels(xlabels)
 
 ax.set_yticks([])
-ax.grid(True)
+ax.grid(False)
 
 fig.set_figheight(9.6)
 fig.set_figwidth(15)
