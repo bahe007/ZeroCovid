@@ -10,7 +10,7 @@ Interessanter ist vermutlich die Möglichkeit zur Darstellung von Zukunftsszenar
 ## Methodik
 Die Grundlagen zur Szenarienentwicklung werden ausführlich in zwei Dokumenten erklärt: 
 
-- Aktuelle Beschreibung:  [Vergleich verschiedener Definitionen für die Reproduktionszahl](description/Grundlagen.pdf)
+- Aktuelle Beschreibung:  [Vergleich verschiedener Definitionen für die Reproduktionszahl](description/R-Werte-Vergleich.pdf)
 - Beschreibung für eine frühere Berechnungs-Methode: [Hintergründe zu der Szenarienentwicklung](description/Grundlagen.pdf)
 
 Eventuelle Fehler können gerne als Issue gemeldet werden.
