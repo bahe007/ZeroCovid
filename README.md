@@ -5,7 +5,15 @@
 
 Mit diesem Python-Skripten kann der Verlauf der gemeldeten Neuinfektionen (nach Meldedatum) sowohl für Gesamtdeutschland als auch auf Landkreisebene dargestellt werden.
 
-Interessanter ist vermutlich die Möglichkeit zur Darstellung von Zukunftsszenarien. Die Beschreibung zur Methodik wird aktuell angepasst, im Wesentlichen werden aber einfach für verschiedene, jeweils konstante Reproduktionszahlen ungefähre Verläufe der neu gemeldeten Infektionen dargestellt. Die alte Beschreibung finden Sie [hier](description/Grundlagen.pdf). Inzwischen wird allerdings eine etwas andere Definition der Reproduktionszahl genutzt. 
+Interessanter ist vermutlich die Möglichkeit zur Darstellung von Zukunftsszenarien. Dabei wird einfach ein konstante Reproduktionszahl angenommen, sodass sich ein exponentielles Abfallen der neu gemeldeten Infektionen ergibt. 
+
+## Methodik
+Die Grundlagen zur Szenarienentwicklung werden ausführlich in zwei Dokumenten erklärt: 
+
+- Aktuelle Beschreibung:  [Vergleich verschiedener Definitionen für die Reproduktionszahl](description/Grundlagen.pdf)
+- Beschreibung für eine frühere Berechnungs-Methode: [Hintergründe zu der Szenarienentwicklung](description/Grundlagen.pdf)
+
+Eventuelle Fehler können gerne als Issue gemeldet werden.
 
 # Beispiele
 ## Verlauf der Fallzahlen in Deutschland

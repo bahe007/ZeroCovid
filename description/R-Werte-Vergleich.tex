@@ -1,0 +1,364 @@
+%
+% Referenzen
+% https://github.com/luong-komorebi/Begin-Latex-in-minutes#first-latex-file
+%
+
+\documentclass[a4paper]{article}
+
+\newcommand{\dd}[1]{\mathrm{d}#1}
+
+% Bilder einfügen
+\usepackage{graphicx}
+
+% Links
+\usepackage{hyperref}
+
+% Zitate
+\usepackage[sorting=none]{biblatex}
+\addbibresource{Zitate-R-Werte.bib}
+
+% Meta-Daten
+\title{Vergleich verschiedener Definitionen für die Reproduktionszahl}
+\date{Februar 2021 \\ v0.1}
+\begin{document}
+    
+    \maketitle
+    \begin{abstract}
+        Die Reproduktionszahl kann auf verschiedene Wege hergeleitet werden. Je nach Definition ergeben sich aber unterschiedlich lange Halbierungsintervalle. Um diese Unterschiede zu untersuchen, werden analytische Lösungen für zwei bekannte Herleitungen beschrieben und die Auswirkungen auf Vervielfachungsintervalle verglichen. Abschließend wird dargestellt, wie die R-Werte ineinander überführt werden können.
+    \end{abstract}
+
+    % Übersicht
+    \section{Übersicht}
+    \paragraph{Motivation}In der öffentlichen Debatte um die Covid19-Pandemie ist die Reproduktionszahl eine entscheidende Kenngröße. Einerseits beschreibt die effektive Reproduktionszahl $R_{eff}$, ob sich die Pandemie ausbreitet oder eher kleiner wird und wie schnell das jeweils geschieht. Andererseits hängt von $R_0$, der "natürlichen Reproduktionszahl" (Basisreproduktionszahl) ab, wie umfassend Gegenmaßnahmen ausfallen müssen, um eine exponentielle Ausbreitung des Virus zu verhindern. 
+    
+    Allerdings können die Reproduktionszahlen auf viele Wege definiert werden. Abhängig von der Definition ergeben sich aber unterschiedliche Verdopplungs- bzw. Halbierungsintervalle. Analog können so auch unterschiedliche Reproduktionszahlen aus dem gleichen Datensatz hergeleitet werden.
+
+    \paragraph{Einschränkungen}Hier wird keine Mathematik betrieben, die nicht schon hunderte zuvor durchgeführt hätten. Beispielhaft sei auf \cite{generationTime} verwiesen, wo schon verschiedene Definitionen der Reproduktionszahl und der Einfluss auf Verdopplungs- und Halbierungsintervalle beschrieben wird.
+
+    \paragraph{Ziele}Wir wollen uns hier nur mit zwei Definitionen befassen: Die erste erschließt sich direkt aus dem Standard-SIR-Modell (zum Beispiel \cite{jonesOnR0}), die zweite findet man beispielsweise in \cite{dehning}. Dort wurden auch bereits beide Definitionen sehr umfassend verglichen, insbesondere mit Blick auf die Auswertung realer Daten. 
+
+    Wir interessieren uns dagegen für die eher theoretische Annahme einer (zumindest stückweise) \textbf{konstanten} Reproduktionszahl und das daraus folgende exponentielle Wachstum. Damit sollenfolgende Fragen geklärt werden:
+
+    \begin{enumerate}
+        \item Welche Interpretation der Reproduktionszahl liegen beiden Definitionen zu Grunde?
+        \item Wie lange sind Verdopplungs- und Halbierungsintervalle für eine gegebene Reproduktionszahl bei beiden Definitionen?
+        \item Wann sind die Ergebnisse ähnlich?
+        \item Wie lassen sich beide Definitionen ineinander überführen?
+    \end{enumerate}
+
+    \paragraph{Gliederung}Um diese Fragen zu beantworten, gliedert sich das Dokument in vier weitere Teile. In je einem Abschnitt werden wir die Reproduktionszahl herleiten und die Herleitung interpretieren. Im dritten Abschnitt werden wir die Vergleiche zwischen den Definitionen durchführen. Zum Schluss fassen wir die Ergebnisse noch kurz zusammen.
+
+    % SIR-Modell
+    \section{Herleitung über das SIR-Modell}
+    \paragraph{Modell}Es wird das einfachste SIR-Modell verwendet, wie es zum Beispiel in \cite{jonesOnR0} beschrieben wird. Mit konstanten Parametern ist es über dieses System von Differentialgleichungen definiert:
+
+    \begin{equation}
+        \frac{d}{dt} S(t) = - \beta \cdot S(t) \cdot I(t)
+    \end{equation}
+
+    \begin{equation}
+        \frac{d}{dt} I(t) = \beta \cdot S(t) \cdot I(t) - \nu I(t)
+    \end{equation}
+
+    \begin{equation}
+        \frac{d}{dt} R(t) = \nu I(t)
+    \end{equation}
+
+    $S(t)$ beschreibt die zum Zeitpunkt $t$ noch nicht infizierte Bevölkerung, $I(t)$ den Anteil der aktuell infektiösen Bevölkerung. $R(t)$ den Teil, der die infektiöse Phase bereits hinter sich hat. Zu jedem Zeitpunkt gilt: $S(t)+I(t)+R(t) = 1$. $\beta$ beschreibt dabei die effektive Kontaktrate, für die gilt: $ \beta = \tau \cdot c $. $\tau$ beschreibt die Transmissibilität, also die Wahrscheinlichkeit dass ein Infizierter einen einzelnen Kontakt ansteckt. $c$ beschreibt die durchschnittliche Kontaktrate, $\nu^{-1} = d$ beschreibt die mittlere Dauer der infektiösen Periode. 
+
+    \paragraph{Definition der Reproduktionszahl}In \cite{jonesOnR0} wird die Basisreproduktionszahl $R_0$ definiert als: $R_0 = \tau \cdot c \cdot d = \beta \cdot d$. Die effektive Reproduktionszahl $R_{eff} =: R$ ist abhängig von $R_0$, der Zahl der bisher Infizierten und eventuellen Verhaltensänderungen. 
+
+    \paragraph{Interpretation}Aus dieser Definition kann man direkt ablesen, welche Faktoren die Reproduktionszahl beeinflussen - also auch an welchen Stellen angegriffen werden kann, um sie zu senken. Zum Beispiel kann die Kontaktrate $c$ durch Bewegungseinschränkungen reduziert werden, die Transmissibilität $\tau$ durch Masken oder Verlagerung der Kontakte nach draußen oder die "effektive" Dauer der Infektiosität durch Quarantäne und Isolation (letzteres könnte man natürlich auch als Einfluss auf die Kontaktrate sehen).
+    
+    Außerdem wird direkt ersichtlich, dass eine (verhältnismäßig) kleine Reduktion an zwei Stellschrauben eine relativ große Wirkung auf das Gesamtergebnis hat, weil sich die Effekte multiplizieren. 
+
+    \paragraph{Exponentielles Wachstum im SIR-Modell}Dieses Modell ist letztlich das Paradebeispiel, für exponentielle Ausbreitung von Krankheiten, solange die Bevölkerung ihr Verhalten nicht ändert. Nimmt man an, dass der größte Teil der Bevölkerung nicht infiziert ist, kann man schreiben $S(t) \approx 1$.
+
+    Damit gilt für (2):
+
+    $$ \frac{d}{dt}I(t) \approx \beta \cdot I(t) - \nu \cdot I(t) = (\beta - \nu) \cdot I(t) $$
+
+    Diese Differentialgleichung lässt sich offensichtlich geschlossen lösen zu: 
+
+    \begin{equation}
+        I(t) = e^{(\beta - \nu) \cdot t}
+    \end{equation}
+
+    Die Zahl der Neuinfektionen ergibt sich nun aus der (negativen) Änderung am $Susceptible$-Teil der Differentialgleichungen. Also: 
+
+    \begin{equation}
+        \dot{I}_{neu,1}(t) = - \frac{d}{dt}S(t) = \beta \cdot I(t) = \beta e^{(\beta - \nu) \cdot t}
+    \end{equation}
+
+    Tatsächlich haben wir durch diesen Vorfaktor nichts gewonnen. Nehmen wir zum Beispiel die Startbedingung $S(t=0) = 1.0-10^{-6}$, $I(t=0) = 10^{-6}$ udn $R(t=0) = 0$ an, dann ergibt es intuitiv Sinn zu fordern, dass gelten muss $\dot{I}_{neu}(t=0) = 10^{-6}$, wenn wir unterstellen dass zuvor keine Infektionen vorhanden waren.
+
+    In diesm Fall müssen wir dann also schreiben: 
+    
+    $$ \dot{I}_{neu,1}(t) = 10^{-6} \cdot e^{(\beta - \nu) \cdot t} $$
+
+    Falls also die Zahl der Neuinfektionen $I_0$ zum Zeitpunkt $t=0$ bekannt ist, können wir schreiben: 
+
+    \begin{equation}
+        \dot{I}_{neu,1}(t) = I_{0} \cdot e^{(\beta - \nu) \cdot t}
+    \end{equation}
+
+    \paragraph{Zusammenhang zwischen exponentiellen Wachstum und der Reproduktionszahl}Da wir letztlich an einem Vergleich der verschiedenen Definitionen interessiert sind, suchen wir einen Ausdruck der Form: 
+
+    \begin{equation}
+        \dot{I}_{neu,i}(t) = I_{0} \cdot e^{r_{i}(R) \cdot t}
+    \end{equation}
+
+    $r_{i}(R)$ ist dabei ein von der Reproduktionszahl abhängiger Faktor, der die Dauer der Halbierungs- bzw. Verdopplungszeiten bestimmt. In diesem Fall erhalten wir: 
+
+    \begin{equation}
+        r_{1}(R) = \frac{R-1}{d}
+    \end{equation}
+
+    Es gibt offensichtlich einen linearen Zusammenhang zwischen $r_{1}$ und $R$. 
+
+    % Herleitung über Fallzahlen
+    \section{Herleitung über Fallzahlen-Definition}
+    \paragraph{Definition der Reproduktionszahl}Aus \cite{dehning} kennen wir eine andere triviale Definition für die Reproduktionszahl für zu diskreten Zeitpunkten angegebene Neuinfektionen: 
+
+    \begin{equation}
+        R_t = \frac{C_t}{C_{t-g}}
+    \end{equation}
+
+    Mit $g$ ist hier die Generationszeit gemeint, wir werden aber annehmen, dass $g=d$. $C_t$ gibt die Neuinfektionen zum Zeitpunkt $t$ an, $C_{t-g}$ die Neuinfektionen zum Zeitpunkt $t-g$. In diesem Fall muss $g$ also erstmal eine positive Ganzzahl sein.  
+
+    \paragraph{Interpretation}Diese Definition der Reproduktionszahl ist weniger ergiebig in ihrer Bedeutung. Im Prinzip wird hier vereinfachend angenommen, dass eine vor $g$ Tagen infizierte Person heute $R_t$ Menschen ansteckt. Das entspricht ziemlich genau der "landläufig bekannten" Definition: "Die Reproduktionszahl gibt an, wie viele Menschen eine infizierte Person im Durchschnitt ansteckt." 
+
+    Somit ist die große Stärke dieser Sichtweise ihre intuitve Verständlichkeit, dass hier exponentielles Wachstum stattfindet: Steckt eine infizierte Person immer zwei Leute an, wird klar wie schnell eine unglaublich große Zahl an Infizierten entstehen kann.
+    
+    Eine weitere Stärke dieser Definition: Die Reproduktionszahl kann hier schon zeitabhängig sein. Da wir ja aber konstante Parameter unterstellen, ignorieren wir das im Folgenden.
+    
+    \paragraph{Zusammenhang zwischen exponentiellen Wachstum und der Reproduktionszahl}Die Herleitung des exponentiellen Wachstums ist hier recht unelegant. Weil wir ja letztlich eine Funktion suchen, schreiben wir statt $C_t$ lieber $c[k]$. $k$ ist hier einfach unser Zeitindex, um deutlich zu machen, dass wir hier diskrete Zeitschritte haben. Somit muss $c[k]$ erfüllen:
+
+    $$ c[k] = R \cdot c[k-d] $$
+
+    Eine Lösung für diese Aufgabe ist gegeben durch: 
+
+    \begin{equation}
+        c[k] = R^{k/d}
+    \end{equation}
+
+    Das können wir einfach durch Einsetzen überprüfen: 
+
+    $$ R \cdot c[k-d] = R \cdot R^{(k-d)/d} = R \cdot R^{k/d - d/d} = R \cdot R^{k/d} \cdot R^{-1} = R^{k/d} = c[k] $$
+
+    \paragraph{Erweiterung zum kontinuierlichen Fall}Analog zum Abschnitt 2. interessieren wir uns auch hier für eine Definition mit kontinuierlichen Zeitschritten, schon allein wegen der besseren Vergleichbarkeit aber auch um nicht weiter fordern zu müssen, dass die Generationszeit eine Ganzzahl ist. 
+
+    Jetzt fordern wir also: 
+
+    \begin{equation}
+        c(t) = R \cdot c(t-d)
+    \end{equation}
+
+    Auch hier ist die Lösung analog zum diskreten Fall: 
+
+    \begin{equation}
+        c(t) = R^{t/d}
+    \end{equation}
+
+    Wir überprüfen wieder durch einsetzen: 
+
+    $$R \cdot R^{(t-d)/d} = R \cdot R^{(t/d - d/d)} = R \cdot R^{t/d} \cdot R^{-1} = R^{t/d} = c(t) $$
+
+    Um die Form $\dot{I}_{neu,i}(t) = e^{r_{i}(R) \cdot t}$ zu erhalten, verwenden wir den Zusammenhang $a^x = e^{x \cdot ln(a)}$. Somit erhalten wir: 
+
+    \begin{equation}
+        \dot{I}_{neu,2}(t) := I_0 \cdot c(t) = I_0 \cdot e^{ln(R)/d \cdot t}
+    \end{equation}
+
+    Für $r_{2}(R)$ erhalten wir damit: 
+
+    \begin{equation}
+        r_{2}(R) = \frac{ln(R)}{d}
+    \end{equation}
+
+    % Vergleich der beiden Definitionen
+    \section{Vergleich der beiden Definitionen}
+    \paragraph{Rekapitulation}Bis jetzt wissen wir also, dass beide Herleitungen für konstante Parameter auf ein exponentielles Wachstum führen. Wir erhalten also eine Funktion der Form:
+    
+    $$ \dot{I}_{neu,i}(t) = I_0 \cdot e^{r_{i}(R) \cdot t} $$
+
+    Für die Herleitung über das SIR-Modell gilt: 
+
+    $$ r_{1}(R) = \frac{R-1}{d} $$
+
+    Definieren wir die Reproduktionszahl über die Neuinfektionen, erhalten wir: 
+
+    $$ r_{2}(R) = \frac{ln(R)}{d} $$
+
+    \paragraph{Gemeinsame Eigenschaften}Beide Definitionen stellen sicher, dass grundlegende Eigenschaften des R-Wertes erhalten bleiben: 
+
+    \begin{enumerate}
+        \item Für $R=1$ wird $r_{i}(R)=0$, die Zahl der täglichen Neuinfektionen bleibt also konstant. 
+        \item Für $R>1$ wird $r_{i}(R)>0$, die Zahl der täglichen Neuinfektionen steigt also mit fortlaufendem $t$. Je größer $R$, desto schneller steigt die Zahl der täglichen Neuinfektionen.
+        \item Für $R<1$ wird $r_{i}(R)<0$, die Zahl der täglichen Neuinfektionen fällt also. Je näher R sich an die Null annähert, desto schneller sinkt die Zahl der täglichen Neuinfektionen.
+    \end{enumerate}
+
+    Insofern sind beide Definitionen also recht ähnlich, als dass die zentralen Eigenschaften des R-Wertes beibehalten werden. 
+
+    \paragraph{Interpretation als Taylorpolynom}Tatsächlich lässt sich ein sehr eleganter Zusammenhang zwischen $r_{1}(R)$ und $r_{2}(R)$ finden: $r_{1}(R)$ kann als ein Taylor-Polynom erster Ordnung zu $r_{2}(R)$ um $R=1$ gesehen werden, es gilt also:
+    
+    $$ r_{1}(R) = T_{r_{2},1,1}(R) = r_{2}(1) \cdot (R-1)^0 + r_{2}'(1) \cdot (R-1) $$
+
+    Mit $r_{2}'(R) = \frac{1}{R \cdot d}$, $r_{2}(1) = 0$ und $r_{2}'(1) = \frac{1}{d}$ folgt dann:
+
+    $$ r_{1}(R) = 0 + \frac{1}{d} \cdot (R-1) = \frac{R-1}{d} $$
+
+    \paragraph{Fehlerabschätzung mit Taylor}Mit dieser Definition können wir die Abschätzung für die Taylor-Entwicklung nutzen, um den Unterschied zwischen $r_{1}(R)$ und $r_{2}(R)$ nach oben zu begrenzen. 
+
+    Allgemein gilt für ein Taylorpolynom $T_{f,x_{*}, n}$ der n-ten Ordnung für eine Funktion $f$ um $x_{*}$:
+
+    $$ |f(x) - T_{f,x_{*}, n}(x)| \leq \frac{C}{(n+1)!}|x-x_{*}|^{n+1} $$
+
+    $C$ beschränkt dabei $|f^{(n+1)}(x)|$ zwischen $x$ und $x_{*}$ nach oben.
+
+    Auf unser Problem bezogen gilt also: 
+
+    $$ |r_{2}(R) - r_{1}(R)| \leq \frac{C}{2!}|R-1|^{2} $$
+
+    Um $C$ zu erhalten, suchen wir das Maximum von $r_{2}^{(2)}(R)$ zwischen $R$ und $1$. Die zweite Ableitung erfüllt: $r_{2}^{(2)}(R) = -\frac{1}{d \cdot R^2}$. Wir unterscheiden zwei Fälle, um eine möglichst optimale Fehlerabschätzung zu erlauben: 
+
+    \begin{enumerate}
+        \item \textbf{Fall 1:} $R \geq 1$
+        
+        In diesem Fall wird $r_{2}^{(2)}$ maximal bei $R=1$. Somit gilt für $C$: $C=\frac{1}{d}$. 
+        
+        \item \textbf{Fall 2:} $R \le 1$
+        
+        Hier lässt sich leider keine feste Obergrenze finden, da $r_{2}^{(2)}(R)$ für $R \rightarrow 0$ gegen $-\infty$ strebt. Stattdessen liegt die kleinste Obergrenze beim jeweiligen $R$, somit gilt hier: $C = \frac{1}{d \cdot R^2}$.
+    \end{enumerate}
+
+    \paragraph{Praktische Konsequenzen aus Taylor}Dieser Zusammenhang zwischen $r_1(R)$ und $r_2(R)$ garantiert uns, dass sich beide Definitionen nur geringfügig unterscheiden, wenn $R$ nicht zu weit von 1 abweicht. 
+
+    An dieser Stelle noch ein exemplarisches Beispiel für den Fall $R=0.6$. $r_1(R)$ erfüllt (mit d=4): $r_1(0.6)=-0.100$. Für $r_2(R)$ gilt dagegen: $r_2(0.6) \approx -0.128$. Der Unterschied erscheint auf den ersten Blick gering, aber dabei ist zu beachten, dass $r_{i}(R)$ im Exponenten steht. Kleine Änderungen können also große Unterschiede verursachen.
+
+    \paragraph{Halbierungsintervalle}Um anschaulich zu quantifizieren, wie schnell sich Fallzahlen für ein gegebenes $R$ verringern, wird häufig angegeben wie lange eine Halbierung dauert. Das heißt wir fragen, für welches $\Delta_{H,i}>0$ gilt: 
+
+    \begin{equation}
+        \dot{I}_{neu,i}(t+\Delta_{H,i}) = \frac{1}{2} \dot{I}_{neu,i}(t)
+    \end{equation}
+
+    Um die Frage etwas einfacher zu beantworten, setzen wir $t=0$, was keine Einschränkung darstellt. 
+
+    $$ \dot{I}_{neu,i}(0 + \Delta_{H,i}) = \frac{1}{2} \dot{I}_{neu,i}(0) $$
+
+    Setzen wir für $\dot{I}_{neu,i}(\Delta_{H,i})$ ein, wird die Frage deutlich einfacher, wenn wir auf beiden Seiten $I_0$ kürzen:
+
+    $$ e^{r_{i}(R) \cdot \Delta_{H,i}} = \frac{1}{2} \cdot e^{r_{i}(R) \cdot 0} = \frac{1}{2} $$
+
+    Somit können wir einfach umstellen, um die Dauer eines Halbierungsintervalls zu erhalten: 
+
+    \begin{equation}
+        \Delta_{H,i} =  \frac{ ln(\frac{1}{2}) }{ r_{i}(R) }
+    \end{equation}
+
+    Für die Herleitung aus dem SIR-Modell erhalten wir: 
+
+    $$ \Delta_{H,1} = ln(\frac{1}{2}) \cdot \frac{d}{R-1} $$
+
+    Über die Fallzahlen-Definition ergibt sich: 
+
+    $$ \Delta_{H,2} = ln(\frac{1}{2}) \cdot \frac{d}{ln(R)} $$
+
+    Aus diesen beiden Definitionen ergibt sich ein ganz praktischer Unterschied: Wird die Reproduktionszahl über das SIR-Modell definiert, kann die Halbierung nicht beliebig schnell gehen ($\Delta_{H, 1}$ wird nie $0$). $\Delta_{H, 2}$ strebt zumindest gegen 0, wenn $R \rightarrow 0$. 
+
+    \paragraph{Ausgewählte Halbierungsintervalle}
+
+    \begin{center}
+        \begin{tabular}{ |c||c|c| } 
+            \hline
+                R & $\Delta_1$ & $\Delta_2$ \\
+                \hline\hline
+                1 & $\infty$ & $\infty$ \\ 
+                0.95 & 55 & 54 \\ 
+                0.9 & 28 & 26 \\ 
+                0.8 & 14 & 12 \\ 
+                0.7 & 9 & 8 \\ 
+                0.6 & 7 & 5 \\ 
+                0.5 & 6 & 4 \\ 
+                0.4 & 5 & 3 \\ 
+                0.1 & 3 (3.08) & 1 (1.20) \\ 
+                0.05 & 3 (2.92) & 1 (0.93) \\ 
+                0.01 & 3 (2.80) & 1 (0.60) \\ 
+                0.001 & 3 (2.77) & 1 (0.40) \\ 
+            \hline
+        \end{tabular}
+    \end{center}
+
+    An diesen Beispielwerten ($d=4$) sieht man deutlich, dass die Herleitung über die Fallzahlen zu kürzeren Halbierungsintervallen führt, als die Herleitung über das SIR-Modell. Außerdem sieht erkennt man bei den sehr niedrigen Reproduktionszahlen, wie $\Delta_{H, 2}$ gegen $0$ strebt, $\Delta_{H, 1}$ aber nicht. 
+
+    Die Unterschiede machen deutlich, dass beide Definitionen nicht willkürlich ausgetauscht werden können und hier tatsächlich Vorsicht geboten ist. Insbesondere um $R\approx0.7$ macht sich auch ein kleiner psychologischer Unterschied recht deutlich bemerkbar: Ein Halbierungsintervall von einer Woche klingt deutlich kürzer als 9 Tage, auch wenn nur zwei Tage Unterschied dazwischen liegen. 
+
+    \paragraph{Allgemeine Vervielfachungsintervalle}Auch wenn Halbierungsintervalle ein relativ leicht verständliches Modell sind, ist es natürlich auch interessant, wie lange es dauert, bis eine beliebige Reduktion (oder auch Erhöhung) der Fallzahlen eingetreten ist. Wird die Inzidenz $J_{Ende}$ angestrebt und liegt aktuell die Inzidenz $J_{Start}$ vor, dann ergibt sich: 
+    
+    $$ \Delta_{V,1} = ln(\frac{J_{Ende}}{J_{Start}}) \cdot \frac{d}{R-1} $$
+
+    beziehungsweise 
+
+    $$ \Delta_{V,2} = ln(\frac{J_{Ende}}{J_{Start}}) \cdot \frac{d}{ln(R)} $$
+
+    \paragraph{Benötigter R-Wert für ein bestimmtes Halbierungsintervall}Eine andere interessante Frage ist, welcher R-Wert nötig ist, damit ein bestimmtes Halbierungsintervall erreicht wird. Dazu stellen wir einfach Gleichung (16) um: 
+
+    $$ r_i(R) = \frac{ln(\frac{1}{2})}{\Delta_{H,i}} $$
+
+    Ist $r_i^{-1}(\cdot)$ die Umkehrfunktion zu $r_i(R)$, dann gilt: 
+
+    \begin{equation}
+        R = r_i^{-1}(\frac{ln(\frac{1}{2})}{\Delta_{H,i}})
+    \end{equation}
+
+    Mit $r_1^{-1}(y) = d \cdot y + 1 $ folgt: 
+
+    $$ R = ln(\frac{1}{2}) \cdot \frac{d}{\Delta_{H,1}} + 1 $$
+
+    Analog erhalten wir für $r_2^{-1}(y) = e^{y \cdot d}$:
+
+    $$ R = e^{ d \cdot \frac{ln(\frac{1}{2})}{\Delta_{H,2}} } $$
+
+
+
+
+    \paragraph{Umrechnung der Definitionen}Bis jetzt haben wir implizit immer gefragt welche Konsequenzen sich aus einer bestimmten Reproduktionszahl in den zwei Modellen folgen. Mindestens genauso interessant ist aber, wie wir beide Modelle ineinander umrechnen können. Zur Motivation stellen wir uns folgendes Szenario vor: Wir haben mit der Fallzahlen-Definition die (zeitvariable) Reproduktionszahl geschätzt. Nun wollen wir aber in einem SIR-Modell mit diesen Ergebnissen weiter rechnen. Dazu wäre es interessant, die ermittelte Reproduktionszahl an das SIR-Modell anzupassen. 
+
+    Da wir nun mit zwei unterschiedlichen R-Werten rechnen, verwenden wir ab sofort die Notation $R_1$ und $R_2$. Der Ansatz zur Umrechnung lautet: 
+
+    \begin{equation}
+        r_1(R_1) = r_2(R_2)
+    \end{equation}
+
+    $$ \frac{R_1 - 1}{d} = \frac{ln(R_2)}{d} $$
+
+    Zuerst lösen wir nach $R_1$ auf:
+
+    \begin{equation}
+        R_1 = ln(R_2) + 1
+    \end{equation}
+
+    Lösen wir umgekehrt nach $R_2$ auf, erhalten wir: 
+
+    \begin{equation}
+        R_2 = e^{R_1 - 1}
+    \end{equation}
+
+    % Zusammenfassung
+    \section{Zusammenfassung}
+    \paragraph{Bedeutung der Definitionen}Das SIR-Modell führt zu einer Herleitung, die zeigt von welchen Faktoren der R-Wert abhängt. Die Definition über die Fallzahlen zeigt dagegen eher die Auswirkungen des R-Werts, nämlich wie viele Personen eine infizierte Person im Mittel ansteckt.
+    
+    \paragraph{Vergleich}Beide Definitionen führen - für konstante Parameter - auf exponentielles Wachstum. Dabei erhalten sie grundsätzliche Eigenschaften, wann sich die Pandemie ausbreitet, wann sie gleich bleibt oder wann sie zurückgedrängt wird. 
+
+    Solange $R \approx 1$, ist es unproblematisch, beide Definitionen auszutauschen. Für größere Abweichungen zeigen sich recht deutliche Unterschiede in den Ver- vielfachungsintervallen, allerdings gibt es durch den Zusammenhang mittels Taylor eine einfache Möglichkeit zur Fehlerabschätzung. 
+
+    Schließlich lassen sich beide Definitionen zumindest für konstante Parameter ineinander umrechnen. 
+
+
+
+
+
+    % Referenzen
+    \printbibliography
+
+\end{document}
