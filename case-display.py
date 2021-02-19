@@ -13,7 +13,7 @@ t, cases = case_numbers.get_cases(file_name)
 ############## Zeichne Fallzahlen ##############
 fig, ax = plt.subplots()
 
-ax.plot(t[:-3], helpers.moving_average(cases)[:-3])
+ax.plot(t[:-3], helpers.moving_average(cases)[:-3], color="black")
 
 # Achsenbeschritung
 xlabels = ["1. Februar", "1. April", "1. Juni", "1. August", "1. Oktober", "1. Dezember", "1. Februar"]
@@ -25,4 +25,5 @@ ax.set_ylabel("Meldedaten des RKI (geglättet)")
 
 fig.set_figheight(9.6)
 fig.set_figwidth(15)
+plt.title("Aktualisiert am {} um 08:00 UTC".format(helpers.todays_date()))
 plt.savefig("images/daily-new-cases.png")

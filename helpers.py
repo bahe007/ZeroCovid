@@ -159,6 +159,12 @@ def all_counties(file_name):
 
         return counties
 
+def todays_date():
+    """Erstellt einen String mit dem heutigen Datum in menschenlesbaren Format.
+    """
+    date = datetime.datetime.now()
+    return date.strftime("%d. %m. %Y")
+
 def todays_filename():
     """Erstellt einen String mit dem Dateinamen, der für heute erwartet würde.
     """

@@ -60,12 +60,11 @@ end = start+50
 delta = 0.025
 
 # Zielgrößen
-ax.plot(t,[7]*len(t), c="black", label="containcovid-pan.eu - Ziel")
-ax.plot(t, [50]*len(t), c="grey", label="Ziel der Bundesregierung")
+ax.plot(t,[10]*len(t), c="gray", label="7-Tagesinzidenz 10")
 
 # Szenarien zeichnen
 R = [0.7, 0.8, 0.9]
-colors = ["green", "blue", "purple"]
+colors = ["green", "orange", "red"]
 for i in range(len(R)):
     end = start + int(np.log(7/confirmed_incidence[start])*d/np.log(R[i]+delta))
 
@@ -75,16 +74,15 @@ for i in range(len(R)):
     ax.fill_between(t[start:end], lower_bound[start:end], upper_bound[start:end], color=colors[i], alpha=.5, label="R_eff={:.1f}".format(R[i]))
 
 # Tatsächliche Meldedaten
-ax.plot(t0[:-3], confirmed_incidence[:-3], label="Meldedaten des RKI (geglättet)", color="red")
+ax.plot(t0[:-3], confirmed_incidence[:-3], label="Meldedaten des RKI (geglättet)", color="black")
 
 # Achsen-Beschriftungen
-xlabels = ["01. Juni", "01. Juli", "01. August", "01. September", "01. Oktober", "01. November", "01. Dezember", "01. Januar", "01. Februar", "01. März", "01. April"]
-ax.set_xticks(["2020/06/01", "2020/07/01", "2020/08/01", "2020/09/01", "2020/10/01", "2020/11/01", "2020/12/01", "2021/01/01", "2021/02/01", "2021/03/01", "2021/04/01"])
+xlabels = ["01. Juni", "01. Juli", "01. August", "01. September", "01. Oktober", "01. November", "01. Dezember", "01. Januar", "01. Februar", "01. März", "01. April", "1. Mai"]
+ax.set_xticks(["2020/06/01", "2020/07/01", "2020/08/01", "2020/09/01", "2020/10/01", "2020/11/01", "2020/12/01", "2021/01/01", "2021/02/01", "2021/03/01", "2021/04/01", "2021/05/01"])
 ax.set_xticklabels(xlabels)
 
 ax.set_xlim(180, len(t)-1)
 
-ax.set_xlabel("Zeit")
 ax.set_ylabel("7-Tages-Inzidenz")
 
 ax.grid(True)
@@ -93,4 +91,6 @@ ax.grid(True)
 ax.legend(loc="upper left")
 fig.set_figheight(9.6)
 fig.set_figwidth(15)
+
+plt.title("Aktualisiert am {} um 08:00 UTC".format(helpers.todays_date()))
 plt.savefig("images/scenario.png")
