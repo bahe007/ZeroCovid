@@ -66,7 +66,7 @@ ax.plot(t,[10]*len(t), c="gray", label="7-Tagesinzidenz 10")
 R = [0.7, 0.8, 0.9]
 colors = ["green", "orange", "red"]
 for i in range(len(R)):
-    end = start + int(np.log(7/confirmed_incidence[start])*d/np.log(R[i]+delta))
+    end = start + int(np.log(10/confirmed_incidence[start])*d/np.log(R[i]+delta))
 
     lower_bound = simulate(start, end, R[i]-delta, confirmed_incidence[start])
     upper_bound = simulate(start, end, R[i]+delta, confirmed_incidence[start])
