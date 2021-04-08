@@ -75,15 +75,17 @@ for i in range(len(R)):
 
 # Tatsächliche Meldedaten
 ax.plot(t0[:-3], confirmed_incidence[:-3], label="Meldedaten des RKI (geglättet)", color="black")
+ax.scatter(t0[:], cases[:]*7/810, color="grey", s=2, label="Tagesmeldungen")
 
 # Achsen-Beschriftungen
-xlabels = ["01. Juni", "01. Juli", "01. August", "01. September", "01. Oktober", "01. November", "01. Dezember", "01. Januar", "01. Februar", "01. März", "01. April", "1. Mai"]
-ax.set_xticks(["2020/06/01", "2020/07/01", "2020/08/01", "2020/09/01", "2020/10/01", "2020/11/01", "2020/12/01", "2021/01/01", "2021/02/01", "2021/03/01", "2021/04/01", "2021/05/01"])
-ax.set_xticklabels(xlabels)
-
+xlabels = ["Jun. 20", "Jul. 20", "Aug. 20", "Sept. 20", "Okt. 20", "Nov. 20", "Dez. 20", "Jan. 21", "Feb. 21", "Mrz. 21", "Apr. 21", "Mai 21", "Jun. 21"]
+ax.set_xticks(["2020/06/01", "2020/07/01", "2020/08/01", "2020/09/01", "2020/10/01", "2020/11/01", "2020/12/01", "2021/01/01", "2021/02/01", "2021/03/01", "2021/04/01", "2021/05/01", "2021/06/01"])
+ax.set_xticklabels(xlabels, fontsize=12)
 ax.set_xlim(180, len(t)-1)
 
-ax.set_ylabel("7-Tages-Inzidenz")
+ax.set_ylabel("7-Tages-Inzidenz", fontsize=12)
+ax.tick_params(axis='both', which='major', labelsize=12)
+ax.tick_params(axis='both', which='minor', labelsize=12)
 
 ax.grid(True)
 
@@ -92,5 +94,7 @@ ax.legend(loc="upper left")
 fig.set_figheight(9.6)
 fig.set_figwidth(15)
 
+plt.rcParams.update({'font.size': 12})
+plt.subplots_adjust(left=0.075, bottom=0.05, right=0.95, top=0.95)
 plt.title("Aktualisiert am {} um 08:00 UTC".format(helpers.todays_date()))
 plt.savefig("images/scenario.png")
