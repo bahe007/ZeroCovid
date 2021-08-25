@@ -2,6 +2,14 @@ description/*
 !description/*.tex
 !description/*.pdf
 
+Formelsammlung/*
+!Formelsammlung/*.tex
+!Formelsammlung/*.pdf
+
+low-case-numbers-stability/description/*
+!low-case-numbers-stability/description/*.tex
+!low-case-numbers-stability/description/*.pdf
+
 data/*.json
 data/*.txt
 data/*.xlsx

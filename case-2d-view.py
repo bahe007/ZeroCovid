@@ -29,8 +29,8 @@ matrix = np.array([helpers.moving_average(cases_per_county[county])[:-3]+1 for c
 fig, ax = plt.subplots()
 ax.set_ylabel("Landkreise bzw. kreisfreie Städte", fontsize=12)
 
-xtick_positions = [t.index("2020/02/01"), t.index("2020/03/01"), t.index("2020/04/01"), t.index("2020/05/01"), t.index("2020/06/01"), t.index("2020/07/01"), t.index("2020/08/01"), t.index("2020/09/01"), t.index("2020/10/01"), t.index("2020/11/01"), t.index("2020/12/01"), t.index("2021/01/01"), t.index("2021/02/01"), t.index("2021/03/01")]
-xlabels = ["1. Februar", "", "1. April", "", "1. Juni", "", "1. August", "", "1. Oktober", "", "1. Dezember", "", "1. Februar", ""]
+xtick_positions = [t.index("2020/02/01"), t.index("2020/03/01"), t.index("2020/04/01"), t.index("2020/05/01"), t.index("2020/06/01"), t.index("2020/07/01"), t.index("2020/08/01"), t.index("2020/09/01"), t.index("2020/10/01"), t.index("2020/11/01"), t.index("2020/12/01"), t.index("2021/01/01"), t.index("2021/02/01"), t.index("2021/03/01"), t.index("2021/04/01"), t.index("2021/05/01"), t.index("2021/06/01"), t.index("2021/07/01"), t.index("2021/08/01")]
+xlabels = ["1. Februar", "", "1. April", "", "1. Juni", "", "1. August", "", "1. Oktober", "", "1. Dezember", "", "1. Februar", "", "1. April", "", "1. Juni", "", "1. August"]
 
 cax = ax.matshow(matrix, cmap=matplotlib.cm.Reds, norm=matplotlib.colors.LogNorm())
 
@@ -52,4 +52,5 @@ cbar.ax.set_yticklabels(["0 Neuininfizierte pro Tag", "10 Neuinfizierte pro Tag"
 plt.rcParams.update({'font.size': 12})
 plt.subplots_adjust(left=0.0, bottom=0.1, right=0.9, top=0.9)
 plt.title("Aktualisiert am {} um 08:00 UTC".format(helpers.todays_date()), y=1.05)
+plt.tight_layout()
 plt.savefig("images/counties-2d-view.png")

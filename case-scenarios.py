@@ -78,10 +78,10 @@ ax.plot(t0[:-3], confirmed_incidence[:-3], label="Meldedaten des RKI (geglättet
 ax.scatter(t0[:], cases[:]*7/810, color="grey", s=2, label="Tagesmeldungen")
 
 # Achsen-Beschriftungen
-xlabels = ["Jun. 20", "Jul. 20", "Aug. 20", "Sept. 20", "Okt. 20", "Nov. 20", "Dez. 20", "Jan. 21", "Feb. 21", "Mrz. 21", "Apr. 21", "Mai 21", "Jun. 21"]
-ax.set_xticks(["2020/06/01", "2020/07/01", "2020/08/01", "2020/09/01", "2020/10/01", "2020/11/01", "2020/12/01", "2021/01/01", "2021/02/01", "2021/03/01", "2021/04/01", "2021/05/01", "2021/06/01"])
+xlabels = ["Sept. 20", "Okt. 20", "Nov. 20", "Dez. 20", "Jan. 21", "Feb. 21", "Mrz. 21", "Apr. 21", "Mai 21", "Jun. 21", "Jul. 21", "Aug. 21", "Sept. 21", "Oct. 21", "Nov. 21"] # "Jun. 20", "Jul. 20", "Aug. 20", 
+ax.set_xticks(["2020/09/01", "2020/10/01", "2020/11/01", "2020/12/01", "2021/01/01", "2021/02/01", "2021/03/01", "2021/04/01", "2021/05/01", "2021/06/01", "2021/07/01", "2021/08/01", "2021/09/01", "2021/10/01", "2021/11/01"]) # "2020/06/01", "2020/07/01", "2020/08/01", 
 ax.set_xticklabels(xlabels, fontsize=12)
-ax.set_xlim(180, len(t)-1)
+ax.set_xlim(210, len(t)-1)
 
 ax.set_ylabel("7-Tages-Inzidenz", fontsize=12)
 ax.tick_params(axis='both', which='major', labelsize=12)

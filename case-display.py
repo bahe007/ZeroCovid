@@ -17,8 +17,8 @@ ax.scatter(t[:], cases[:], color="grey", s=2, label="Tagesmeldungen")
 ax.plot(t[:-3], helpers.moving_average(cases)[:-3], color="black", label="Gemittelte Werte")
 
 # Achsenbeschritung
-xlabels = ["Feb. 20", "Apr. 20", "Jun. 20", "Aug. 20", "Okt. 20", "Dez. 20", "Feb. 21", "Apr. 21"]
-ax.set_xticks(["2020/02/01", "2020/04/01", "2020/06/01", "2020/08/01", "2020/10/01", "2020/12/01", "2021/02/01", "2021/04/01"])
+xlabels = ["Feb. 20", "Apr. 20", "Jun. 20", "Aug. 20", "Okt. 20", "Dez. 20", "Feb. 21", "Apr. 21", "Jun. 21", "Aug. 21"]
+ax.set_xticks(["2020/02/01", "2020/04/01", "2020/06/01", "2020/08/01", "2020/10/01", "2020/12/01", "2021/02/01", "2021/04/01", "2021/06/01", "2021/08/01"])
 ax.set_xticklabels(xlabels, fontsize=12)
 ax.tick_params(axis='both', which='major', labelsize=12)
 ax.tick_params(axis='both', which='minor', labelsize=12)
